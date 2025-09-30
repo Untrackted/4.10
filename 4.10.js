@@ -1,3 +1,5 @@
+//НАБОР ЗАДАЧ, ОХВАТЫВАЮЩИЙ ГЕНЕРАЦИЮ, ПЕРЕМЕШИВАНИЕ, ОБЪЕДИНЕНИЕ, ПОИСК И РАБОТУ С ДИАПАЗОНАМИ (МАССИВАМИ)
+
 //Задача №1. Генерация произвольных массивов и адаптирование кода под существующую ситуацию
 
 let count = 42; // Количество элементов, которые нужно сгенерировать в массиве
@@ -232,3 +234,285 @@ if(i < arr9.length) result3.push(arr9[i]);
 }
 
 console.log(result3);
+
+
+
+let arrA = [];
+let arrB = [];
+
+let countA = 5;
+let countB = 3;
+
+let minA = Math.min(10, 20);
+let maxA = Math.max(10, 20);
+
+let minB = Math.min(-7, 5);
+let maxB = Math.max(-7, 5);
+
+let target = 12;
+
+let rangeA = Math.abs(maxA - minA);
+let rangeB = Math.abs(maxB - minB);
+console.log(rangeA, rangeB);
+
+//#1
+for(let i = 0; i < countA; i++){ // Генерация массива А длиной countA
+arrA.push(Math.floor(Math.random() * (rangeA + 1) + minA));
+}
+console.log(arrA);
+
+for(let i = 0; i < countB; i++){ // Генерация массива В длиной countВ
+arrB.push(Math.floor(Math.random() * (rangeB + 1) + minB));
+}
+console.log(arrB);
+
+//#2
+for(let i = arrA.length - 1; i > 0; --i){ //Перемешивание массива с помощью алгоритма Fisher–Yates
+let j = Math.floor(Math.random() * (i + 1));
+let temp = arrA[i];
+arrA[i] = arrA[j];
+arrA[j] = temp; 
+}
+console.log(arrA);
+
+
+for(let i = arrB.length - 1; i > 0; i--){
+let j = Math.floor(Math.random() * (i + 1));
+let temp = arrB[i];
+arrB[i] = arrB[j];
+arrB[j] = temp;
+}
+console.log(arrB);
+
+//#3
+let result4 = [];
+for(let i = 0; i < Math.max(arrA.length, arrB.length); i++){ //Объединение двух массивов в один result, чередуя элементы с добавлением остатка в конец
+if (i < arrA.length){
+result4.push(arrA[i]);
+} 
+if(i < arrB.length){
+result4.push(arrB[i]);
+}
+}
+console.log(result4);
+
+//#4 Поиск индекса заданного числа
+// Инициализируем переменную для хранения индекса найденного элемента
+let index2 = -1;
+
+for(let i = 0; i < result4.length; i++){ // Проходим по массиву result от 0 до последнего индекса
+if(result4[i] === target){ // Если текущий элемент равен target — сохраняем его индекс
+index2 = i;
+console.log(`Индекс элемента ${target}: ${index2}`); // Выводим индекс элемента, обращаясь к самой переменной index, которой мы присвоили найденный индекс
+break; //завершаем цикл после первого совпадения
+}
+}
+//Размещаем проверку вне цикла! Иначе будет выводится сообщение о не совпаденни на каждой итерации, а нужно только одно оповещение.
+if(index2 === -1){// Проверяем после цикла: если индекс не изменился, элемент не найден. Если элемент не найден, то выводим сообщение об этом. Т. е. выполняем проверку, сравниваем index (по умолчанию false/-1) с -1, если равны, то выводим сообщение 'Индекс заданного числа не найден' 
+console.log('Индекс заданного числа не найден');
+}
+
+
+
+//ПОВТОРНОЕ РЕШЕНИЕ ЗАДАЧ
+console.log('№1. Генерация массивов arrX и arrY длиной countX, countY');
+
+let arrX = [];
+let arrY = [];
+
+let countX = 4;
+let countY = 6;
+
+let minX = Math.min(-10, 10);
+let maxY = Math.max(-10, 10);
+
+let range3 = Math.abs(maxY - minX);
+console.log(range);
+
+for(let i = 0; i < countX; i++){//генерация массива длиной countX
+arrX.push(Math.floor(Math.random() * (range3 + 1) + minX));
+}
+console.log(arrX);
+
+for(let i = 0; i < countY; i++){//генерация массива длиной countY
+arrY.push(Math.floor(Math.random() * (range3 + 1) + minX));
+}
+console.log(arrY);
+
+
+console.log('№2. Перемешивание массивов arrX и arrY с помощью алгоритма Fisher–Yates');
+
+for(let i = arrX.length - 1; i > 0; --i){ //Перемешивание массива arrX с помощью алгоритма Fisher–Yates
+let j = Math.floor(Math.random() * (i + 1));
+let temp = arrX[i];
+arrX[i] = arrX[j];
+arrX[j] = temp;
+}
+
+console.log(arrX);
+
+for(let i = arrY.length - 1; i > 0; --i){ //Перемешивание массива arrY с помощью алгоритма Fisher–Yates
+let j = Math.floor(Math.random() * (i + 1));
+let temp = arrY[i];
+arrY[i] = arrY[j];
+arrY[j] = temp;
+}
+
+console.log(arrY);
+
+console.log('№3. Объединение двух массивов arrX и arrY в массив result, чередуя элементы и добавляя остаток');
+let result1 = [];
+
+for(let i = 0; i < Math.max(arrX.length, arrY.length); i++){ //Объединение двух массивов arrX и arrY в массив result, чередуя элементы и добавляя остаток.
+if(i < arrX.length){
+result1.push(arrX[i]);
+}
+if(i < arrY.length){
+result1.push(arrY[i]);
+}
+}
+
+console.log(result1);
+
+console.log('№4. Поиск индекса заданного числа target');
+let target1 = 5;
+let index1 = -1;
+
+for(let i = 0; i < result1.length; i++){ // Поиск индекса заданного числа target 
+if(target1 === result1[i]){
+index1 = i;
+console.log(`Индекс элемента 5: ${index1}`);
+break;
+}
+}
+if(index1 === -1){
+console.log('Элемент 5 не найден');
+}
+
+
+console.log('№5. Сохранение всех индексов в массив');
+let targetX = 5;
+let indices = [];
+
+for(let i = 0; i < result.length; i++){ // Сохранение всех индексов в массив
+if(targetX === result[i]){
+indices.push(i);
+}
+}
+if(indices.length > 0){
+console.log(`Элемент ${targetX} найден в индексе(-ах): ${indices.join(', ')}`);
+}else{
+console.log(`Элемент ${targetX} не найден`);
+}
+
+console.log('№1. Генерация массива arrZ длиной countZ');
+let arrZ = [];
+let countZ = 10;
+
+let minZ = Math.min(-15, 15);
+let maxZ = Math.max(-15, 15);
+
+let rangeZ = Math.abs(maxZ - minZ);
+
+for(let i = 0; i < countZ; i++){
+arrZ.push(Math.floor(Math.random() * (rangeZ + 1) + minZ));
+}
+console.log(arrZ);
+
+
+console.log('№2. Перемешивание массива arrZ с помощью алгоритма Fisher–Yates');
+for(let i = arrZ.length - 1; i > 0; --i){
+let  j = Math.floor(Math.random() * (i + 1));
+let temp = arrZ[i];
+arrZ[i] = arrZ[j];
+arrZ [j] = temp;
+}
+
+console.log(arrZ);
+
+
+console.log('№2. Вариант 2. Перемешивание массива arrZ с помощью алгоритма Fisher–Yates');
+let pool = [];
+// Создаём пустой массив pool, который будет содержать все числа от minZ до maxZ
+for(let i = minZ; i <= maxZ; i++){
+pool.push(i);
+// Заполняем массив pool числами от minZ до maxZ включительно
+}
+console.log(pool);
+for (let i = pool.length - 1; i > 0; i--){
+// Запускаем цикл от последнего элемента массива к первому — это основа алгоритма Фишера–Йетса
+let j = Math.floor(Math.random() * (i + 1));
+// Генерируем случайный индекс j от 0 до i включительно
+[pool[i], pool[j]] = [pool[j], pool[i]];
+// Одновременный обмен значениями между pool[i] и pool[j].
+// Это означает: возьми элемент на позиции i и поменяй его местами с элементом на случайной позиции j.
+// Такой обмен повторяется в цикле, чтобы перемешать массив равномерно и без повторов.
+// Используется деструктурирующее присваивание — современный синтаксис JavaScript, позволяющий избежать временной переменной.
+}
+arrZ = pool.slice(0, countZ);
+// Копируем первые countZ элементов из перемешанного массива pool в arrZ — получаем нужное количество случайных чисел
+console.log(arrZ);
+
+
+console.log('№3. Генерация массива filtered (положительные числа, чётные числа и числа, которые не равны targetZ) с пояснениями');
+let targetZ = 6; //Задаём значение, которое нужно исключить из массива
+let filtered = []; //Создаём пустой массив, в который будем добавлять подходящие элементы
+
+for(let i = 0; arrZ.length > i; i++){
+//Запускаем цикл for, проходящий по всем элементам массива arrZ. 
+// i — индекс текущего элемента. 
+// Условие arrZ.length > i — пока индекс меньше длины массива.
+if(arrZ[i] > 0 && arrZ[i] % 2 === 0 && arrZ[i] !== targetZ){
+//Проверяем три условия одновременно: 
+// число положительное (> 0)
+// число чётное (% 2 === 0)
+// число не равно targetZ (!== 6)
+filtered.push(arrZ[i]);
+//Если все условия выполнены — добавляем элемент в массив filtered
+console.log(`Элемент ${arrZ[i]}: положительный, четный, не равен 6 - добавлен`); //Выводим пояснение, почему элемент был добавлен
+}
+if(arrZ[i] <= 0){ //Проверяем, является ли число неположительным (нулевым или отрицательным)
+console.log(`Элемент ${arrZ[i]}: отрицательный - пропущен`); //Если условие выше выполнено — выводим причину пропуска
+}
+if(arrZ[i] % 2 !== 0){ //Проверяем, является ли число нечётным.
+console.log(`Элемент ${arrZ[i]}: нечетный - пропущен`); //Если условие выше выполнено — выводим причину пропуска
+}
+if(arrZ[i] === targetZ){ //Проверяем, равен ли элемент targetZ
+console.log(`Элемент ${arrZ[i]}: равен 6 - пропущен`); //Если условие выше выполнено — выводим причину пропуска
+}
+}
+console.log(filtered); //После завершения цикла выводим итоговый массив filtered, содержащий только те элементы, которые прошли все фильтры.
+
+
+console.log('№3. Вариант 2. Генерация массива filtered (положительные числа, чётные числа и числа, которые не равны targetZ) с пояснениями');
+let targetY = 6;
+let filtered2 = [];
+
+for(let i = 0; i < arrZ.length; i++){ 
+// Запускаем цикл по всем элементам массива arrZ
+let x = arrZ[i]; 
+// Сохраняем текущий элемент массива в переменную x для удобства
+if(x > 0 && x % 2 === 0 && x !== targetY){ 
+// Проверяем три условия: положительное, чётное и не равно targetX
+console.log(`Элемент ${x}: положительный, четный, не равен ${targetY} - добавлен`); 
+// Выводим пояснение, почему элемент добавлен
+filtered2.push(x);
+// Добавляем элемент в массив filtered2
+
+}else{
+// Если хотя бы одно из условий не выполнено — переходим к объяснению причины пропуска
+let reasons = [];
+// Создаём массив для хранения причин, по которым элемент не прошёл фильтр
+
+if(x <= 0) reasons.push('отрицательный'); // if (условие) действие;
+// Если число отрицательное — добавляем причину
+if(x % 2 !== 0) reasons.push('нечетный'); // Если после if идёт одна единственная инструкция, то можно записать её в одну строку без {}
+// Если число нечётное — добавляем причину
+if(x === targetY) reasons.push(`равен ${targetY}`); 
+// Если число равно targetX — добавляем причину
+console.log(`Элемент ${x}: ${reasons.join(', ')} - пропущен`);  
+// Выводим все причины пропуска, объединённые через запятую
+}
+}
+
+console.log('Результат:', filtered2); // Выводим итоговый массив, содержащий только подходящие элементы
